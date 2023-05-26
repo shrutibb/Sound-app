@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    /* CSS styles for the dashboard */
+    .item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .thumbnail {
+      width: 100px;
+      height: 100px;
+      margin-right: 10px;
+    }
+
+    .graph {
+      width: 200px;
+      height: 50px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+
+    .progress-bar {
+      width: 200px;
+      height: 20px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #00cc00;
+    }
+  </style>
+</head>
+<body>
+  <div id="dashboard">
+    
+  </div>
+
+  <script>
+    // Sample data for the dashboard
+    const items = [
+      {
+        image: "image1.jpg",
+        title: "Sound 1",
+        unique_plays: 50,
+        total_plays: 100,
+        completion_rate: 75,
+      },
+      {
+        image: "image2.jpg",
+        title: "Sound 2",
+        unique_plays: 30,
+        total_plays: 50,
+        completion_rate: 60,
+      },
+      // Add more items as needed
+    ];
+
+    // Function to create and populate the dashboard
+    function createDashboard() {
+      const dashboard = document.getElementById("dashboard");
+
+      items.forEach((item) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "item";
+
+        const thumbnail = document.createElement("img");
+        thumbnail.src = item.image;
+        thumbnail.alt = "Thumbnail";
+        thumbnail.className = "thumbnail";
+
+        const title = document.createElement("div");
+        title.textContent = item.title;
+
+        const graph = document.createElement("div");
+        graph.className = "graph";
+        graph.style.width = `${(item.unique_plays / item.total_plays) * 100}%`;
+
+        const progress = document.createElement("div");
+        progress.className = "progress-bar";
+
+        const progressBar = document.createElement("div");
+        progressBar.className = "progress-bar-fill";
+        progressBar.style.width = `${item.completion_rate}%`;
+
+        progress.appendChild(progressBar);
+
+        itemDiv.appendChild(thumbnail);
+        itemDiv.appendChild(title);
+        itemDiv.appendChild(graph);
+        itemDiv.appendChild(progress);
+
+        dashboard.appendChild(itemDiv);
+      });
+    }
+
+    // Call the createDashboard function when the page loads
+    window.addEventListener("load", createDashboard);
+  </script>
+</body>
+</html>
